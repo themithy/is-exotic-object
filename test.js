@@ -1,7 +1,8 @@
 
 const isExoticObject = require('./index')
 
-test('simple type', () => {
+test('primitive type', () => {
+  expect(isExoticObject()).toBe(false)
   expect(isExoticObject(undefined)).toBe(false)
   expect(isExoticObject(null)).toBe(false)
   expect(isExoticObject(false)).toBe(false)
@@ -11,12 +12,16 @@ test('simple type', () => {
   expect(isExoticObject(Symbol())).toBe(false)
 })
 
-test('regular object', () => {
+test('regular object (via literal)', () => {
   expect(isExoticObject({})).toBe(false)
-  expect(isExoticObject(Object.create(null))).toBe(false)
-  expect(isExoticObject(undefined)).toBe(false)
-  expect(isExoticObject(null)).toBe(false)
-  expect(isExoticObject(0)).toBe(false)
+})
+
+test('regular object (via constructor)', () => {
+  expect(isExoticObject(new Set())).toBe(false)
+  expect(isExoticObject(new Map())).toBe(false)
+  expect(isExoticObject(new WeakSet())).toBe(false)
+  expect(isExoticObject(new WeakMap())).toBe(false)
+  expect(isExoticObject(new Int8Array())).toBe(false)
 })
 
 test('exotic object (via literal)', () => {
@@ -67,11 +72,8 @@ test('exotic prototype', () => {
   expect(isExoticObject(Error.prototype)).toBe(true)
 })
 
-test('proxy to regular object', () => {
-  expect(isExoticObject(new Proxy({}, {}))).toBe(false)
-})
-
-test('proxy to exotic object', () => {
+test('proxy', () => {
+  expect(isExoticObject(new Proxy({}, {}))).toBe(true)
   expect(isExoticObject(new Proxy(new Date(), {}))).toBe(true)
 })
 
