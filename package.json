@@ -1,0 +1,19 @@
+{
+  "name": "is-exotic-object",
+  "version": "1.0.0",
+  "description": "Tell EcmaScript exotic object apart",
+  "main": "./index.js",
+  "scripts": {
+    "test": "jest test.js"
+  },
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "@babel/core": "^7.0.0",
+    "@babel/cli": "^7.0.0",
+    "@babel/preset-env": "^7.0.0",
+    "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
+    "babel-jest": "^24.0.0",
+    "jest": "^24.0.0"
+  }
+}
